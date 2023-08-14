@@ -1,153 +1,50 @@
-# R2-Explorer
+# Some R2 Explorer
 
-A Google Drive Interface for your Cloudflare R2 Buckets!
+This project is based [R2-Explorer](https://github.com/G4brym/R2-Explorer) by [Gabriel Massadas](http://massadas.com/). To see all features go to his [README.md](https://github.com/G4brym/R2-Explorer/blob/main/README.md) page.
 
-This project is deployed/self-hosted in your own Cloudflare Account as a Worker, and no credential/token is required to
-start using it.
+This version let user copy file as cURL commannd and powershell if the file is ending with .ps1.
 
-You can see an live example, in `read-only` mode, in your browser at https://r2-explorer.massadas.com/
-
-This project is still in development, and there are definitely going to be some weird issues sometimes, but when you
-find something
-please [open an new issue](https://github.com/G4brym/R2-Explorer/issues/new) for it to get solved.
-
-## Features
-
-- Very quick bucket/folder navigation
-- pdf, image, txt, markdown, csv, etc in-browser preview
-- Drag-and-Drop upload
-- Multiple files and folder uploads
-- Create folders
-- Rename files
-- Download files
-- Delete files
-- Right click in file for extra options
-- Multipart upload for big files
-- Cloudflare Access validation using jwt
-
-## Configurations
-
-These options are defined in the `index.js` file, in the `R2Explorer({ readonly: false, ... })`.
-
-| Name               | Type(s)                  | Description                                                           | Examples                                                  |
-|--------------------|--------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------|
-| `readonly`         | `boolean` or `undefined` | Controls the write access globally, default: `true`                   | `true`                                                    |
-| `cors`             | `boolean` or `undefined` | Enables or disables CORS access to the internal API, default: `false` | `true`                                                    |
-| `cfAccessTeamName` | `string`  or `undefined` | When set enforces Cloudflare Access in all requests                   | `radar`  (taken from https://radar.cloudflareaccess.com/) |
+![cURL](./docs/images/curl.jpg)
+![Powersell](./docs/images/powershell.jpg)
 
 
-## FAQ
+I assume that you are using the project behind cloudflare zerotrust. To make it works you will 2 need two things:
 
-Q. Is there any Authentication for r2-explorer?
-
-A. No. If you want authenticated access, you must
-setup [Cloudflare Access](https://www.cloudflare.com/products/zero-trust/access/) in your account.
-Access is free up to 50 users.
-
-___
-
-Q. Can i upload files bigger than 100MB?
-
-A. Yes! R2-Explorer now
-support's [Multipart Upload](https://developers.cloudflare.com/r2/data-access/workers-api/workers-multipart-usage/),
-that splits the files you are uploading in about 95MB chunks for uploading within the Cloudflare 100MB uploading limit.
-
-## Getting Started
-
-Run this command to get an example project setup
+- Create a service auth token in the zerotrust interface
+- before doing the wrangler publish, you need to create 2 secrets with wrangler.
 
 ```bash
-npx r2-explorer my-r2-explorer
-```
+npx instal ...
+nano wrangler.toml
+nano src/index.js
 
-Change into the newly created directory and install the packages
+npm i
 
-```bash
-cd my-r2-explorer
-npm install
-```
+wrangler secret put CF_ID
+# you will be prompted to enter your secret
+wrangler secret put CF_SECRET
+# you will be prompted to enter your secret
 
-Update the `wrangler.toml` with your R2 Buckets (tip: you can setup as many Buckets as your want)
-
-```
-- wrangler.toml -
-...
-[[r2_buckets]]
-binding = 'my-bucket-name'
-bucket_name = 'my-bucket-name'
-preview_bucket_name = 'my-bucket-name'
-```
-
-If you want to be able to upload/modify your buckets, you must update the `readonly` flag in `src/index.ts` file.
-
-After that just run publish and the project will be up and running for you and everyone you invite to use the Buckets
-
-```bash
 wrangler publish
 ```
 
-## Upgrading your installation
+Note: this feature will work is readonly mode is set to false and curlFeature to true.
 
-In order to update to the latest version you just need to install the latest r2-explorer package from npm and re-deploy
-your application
+```js
+// example of src/index.js
 
-```bash
-npm install r2-explorer@latest --save
+import { R2Explorer } from '@service-yack/some-r2-explorer';
+
+const explorer = R2Explorer({ readonly: false, curlFeature: true })
+
+export default {
+  async fetch(request, env, context) {
+    return explorer(request, env, context)
+  }
+};
 ```
 
-```bash
-wrangler publish
-```
+**Credits**
 
-## TODO
-
-- allow bucket names with spaces
-- Search files
-- Rename folders
-- Delete folders
-- Image thumbnail's using Cloudflare workers
-- Tooltip when hovering a file with absolute time in "x days time ago" format
-- Automatically load more files, when the bottom is reached (current limit is 1000 files)
-- Download files bigger than 2gb with presigned url's
-- set file navigation in the url to allow direct share of a specific file
-- only support previews to files under 100mb
-
-## Known issues
-
-- Rename files with special characters is not possible with
-  current [sdk issue here](https://github.com/aws/aws-sdk-js/issues/1949)
-
-## Images
-
-Home Page
-![Home](https://github.com/G4brym/R2-Explorer/raw/main/docs/images/home.png)
-
-Image Previewer
-![Home](https://github.com/G4brym/R2-Explorer/raw/main/docs/images/image-preview.png)
-
-Pdf Previewer
-![Home](https://github.com/G4brym/R2-Explorer/raw/main/docs/images/pdf-preview.png)
-
-New Folder
-![Home](https://github.com/G4brym/R2-Explorer/raw/main/docs/images/new-folder.png)
-
-Uploading Files
-![Home](https://github.com/G4brym/R2-Explorer/raw/main/docs/images/uploading-files.png)
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
+- [Gabriel Massadas](https://github.com/G4brym)
+- [somecanadian](https://github.com/som3canadian)

@@ -59,18 +59,18 @@
         <li class="menu-title info">Info</li>
 
         <li>
-          <a target="_blank" href="https://github.com/G4brym/R2-Explorer/issues/new">
+          <a target="_blank" href="https://github.com/service-yack/Some-R2-Explorer/issues/new">
             <i class="bi bi-info-square-fill me-2"></i>
             <span>Provide Feedback</span>
           </a>
         </li>
 
-        <li v-if="updateAvailable">
+        <!-- <li v-if="updateAvailable">
           <a target="_blank" :href="updateUrl">
             <i class="bi bi-cloud-download-fill me-2"></i>
             <span>Update Available</span>
           </a>
-        </li>
+        </li> -->
       </ul>
 
     </div>
@@ -91,35 +91,35 @@ export default {
       return EventBus
     }
   },
-  data: function () {
-    return {
-      updateAvailable: false,
-      updateUrl: 'https://github.com/G4brym/R2-Explorer',
-      currentVersion: 'v0.0.1'
-    }
-  },
-  created () {
-    const self = this
+  // data: function () {
+  //   return {
+  //     updateAvailable: false,
+  //     updateUrl: 'https://github.com/G4brym/R2-Explorer',
+  //     currentVersion: 'v0.8.0'
+  //   }
+  // },
+  // created () {
+  //   const self = this
 
-    function normalizeVersion (version) {
-      return version.replace('v', '')
-    }
+  //   function normalizeVersion (version) {
+  //     return version.replace('v', '')
+  //   }
 
-    function compareVersions (currectVersion, latestVersion) {
-      return latestVersion.localeCompare(currectVersion, undefined, { numeric: true, sensitivity: 'base' }) === 1
-    }
+  //   function compareVersions (currectVersion, latestVersion) {
+  //     return latestVersion.localeCompare(currectVersion, undefined, { numeric: true, sensitivity: 'base' }) === 1
+  //   }
 
-    axios.get('https://r2-explorer-api.massadas.com/api/releases/latest/').then((response) => {
-      this.updateAvailable = compareVersions(
-        normalizeVersion(self.currentVersion),
-        normalizeVersion(response.data?.latest_version?.version)
-      )
+  //   axios.get('https://r2-explorer-api.massadas.com/api/releases/latest/').then((response) => {
+  //     this.updateAvailable = compareVersions(
+  //       normalizeVersion(self.currentVersion),
+  //       normalizeVersion(response.data?.latest_version?.version)
+  //     )
 
-      if (this.updateAvailable && response.data?.latest_version?.url) {
-        this.updateUrl = response.data?.latest_version?.url
-      }
-    })
-  }
+  //     if (this.updateAvailable && response.data?.latest_version?.url) {
+  //       this.updateUrl = response.data?.latest_version?.url
+  //     }
+  //   })
+  // }
 }
 </script>
 

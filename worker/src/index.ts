@@ -19,8 +19,8 @@ import {R2ExplorerConfig} from "./interfaces";
 import {authenticateUser} from "./access";
 
 
-
 export function R2Explorer(config?: R2ExplorerConfig) {
+
   config = config || {}
   if (config.readonly !== false) config.readonly = true
 
@@ -30,7 +30,6 @@ export function R2Explorer(config?: R2ExplorerConfig) {
   if(config.cfAccessTeamName) {
     router.all('*', authenticateUser)
   }
-
 
   router.get('/js/app.js', () => {
     return new Response(atob(app), {
@@ -96,6 +95,10 @@ export function R2Explorer(config?: R2ExplorerConfig) {
 
   return (request, env, context) => {
     return router.handle(request, env, { ...context, config: config }).then((response) => {
+      if(config.curlFeature === true ) {
+        config.CF_ID = env.CF_ID
+        config.CF_SECRET = env.CF_SECRET
+      }
       if (config.cors === true) {
         // can modify response here before final return, e.g. CORS headers
         Object.entries({
