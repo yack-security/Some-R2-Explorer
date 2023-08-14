@@ -14,17 +14,22 @@ I assume that you are using the project behind cloudflare zerotrust. To make it 
 - before doing the wrangler publish, you need to create 2 secrets with wrangler.
 
 ```bash
-npx instal ...
+npx install @service-yack/some-r2-explorer@<latestTag> my-some-r2-explorer
+# ex: npx install @service-yack/some-r2-explorer@1.0.2 my-some-r2-explorer
+cd my-some-r2-explorer
+
+# modify config to fit your need in those 2 files
 nano wrangler.toml
 nano src/index.js
 
-npm i
-
+# put secret in worker
 wrangler secret put CF_ID
 # you will be prompted to enter your secret
 wrangler secret put CF_SECRET
 # you will be prompted to enter your secret
 
+# finish the installation
+npm i
 wrangler publish
 ```
 
