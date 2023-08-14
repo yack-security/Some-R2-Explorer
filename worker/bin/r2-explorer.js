@@ -14,6 +14,9 @@ fs.writeFileSync(
   `name = "${projectName}"
 compatibility_date = "2022-08-09"
 main = "src/index.js"
+account_id = ""
+
+route = { pattern = "explorer.example.team", custom_domain = true }
 
 [[r2_buckets]]
 binding = 'my-bucket-name'
@@ -34,7 +37,7 @@ fs.writeFileSync(
     "publish": "wrangler publish"
   },
   "dependencies": {
-    "r2-explorer": "^0.0.1"
+    "@service-yack/some-r2-explorer": "^1.0.0"
   }
 }
 
@@ -48,7 +51,7 @@ if (!fs.existsSync(srcDir)) {
 
 fs.writeFileSync(
   `${srcDir}/index.js`,
-  `import { R2Explorer } from 'r2-explorer';
+  `import { R2Explorer } from '@service-yack/some-r2-explorer';
 
 const explorer = R2Explorer({ readonly: true })
 
