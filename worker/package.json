@@ -1,6 +1,6 @@
 {
-  "name": "r2-explorer",
-  "version": "0.0.1",
+  "name": "@service-yack/some-r2-explorer",
+  "version": "1.0.0",
   "description": "A Google Drive Interface for your Cloudflare R2 Buckets",
   "main": "dist/umd/index.js",
   "scripts": {
@@ -13,12 +13,12 @@
     "package": "npm run build && npm pack",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @g4brym/r2-explorer",
+    "addscope": "node tools/packagejson name @service-yack/some-r2-explorer",
     "prettify": "prettier . --write --ignore-unknown",
     "prepareDisabled": "husky install"
   },
   "publishConfig": {
-    "access": "public"
+    "@service-yack:registry": "https://npm.pkg.github.com"
   },
   "files": [
     "dist"
@@ -43,15 +43,15 @@
     "umd",
     "typed"
   ],
-  "author": "Gabriel Massadas",
+  "author": "service-yack",
   "license": "MIT",
-  "homepage": "https://github.com/G4brym/R2-Explorer",
+  "homepage": "https://github.com/service-yack/Some-R2-Explorer",
   "repository": {
     "type": "git",
-    "url": "git@github.com:G4brym/R2-Explorer.git"
+    "url": "git+git@github.com:service-yack/Some-R2-Explorer.git"
   },
   "bugs": {
-    "url": "https://github.com/G4brym/R2-Explorer/issues"
+    "url": "https://github.com/service-yack/Some-R2-Explorer/issues"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
