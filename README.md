@@ -7,7 +7,6 @@ This version let user copy file as cURL commannd and powershell if the file is e
 ![cURL](./docs/images/curl.jpg)
 ![Powersell](./docs/images/powershell.jpg)
 
-
 I assume that you are using the project behind cloudflare zerotrust. To make it works you will 2 need two things:
 
 - Create a service auth token in the zerotrust interface
