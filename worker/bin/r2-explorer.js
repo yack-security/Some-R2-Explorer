@@ -37,7 +37,7 @@ fs.writeFileSync(
     "publish": "wrangler publish"
   },
   "dependencies": {
-    "@service-yack/some-r2-explorer": "^1.0.0"
+    "@yack-security/some-r2-explorer": "^1.0.0"
   }
 }
 
@@ -51,7 +51,7 @@ if (!fs.existsSync(srcDir)) {
 
 fs.writeFileSync(
   `${srcDir}/index.js`,
-  `import { R2Explorer } from '@service-yack/some-r2-explorer';
+  `import { R2Explorer } from '@yack-security/some-r2-explorer';
 
 export default R2Explorer({ readonly: true, curlFeature: false });
 `
