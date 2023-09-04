@@ -37,7 +37,7 @@ fs.writeFileSync(
     "publish": "wrangler publish"
   },
   "dependencies": {
-    "@yack-security/some-r2-explorer": "^1.0.0"
+    "@yack-security/some-r2-explorer": "^1.0.8"
   }
 }
 
