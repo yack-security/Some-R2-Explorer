@@ -53,13 +53,7 @@ fs.writeFileSync(
   `${srcDir}/index.js`,
   `import { R2Explorer } from '@service-yack/some-r2-explorer';
 
-const explorer = R2Explorer({ readonly: true, curlFeature: false })
-
-export default {
-  async fetch(request, env, context) {
-    return explorer(request, env, context)
-  }
-};
+export default R2Explorer({ readonly: true, curlFeature: false });
 `
 )
 
