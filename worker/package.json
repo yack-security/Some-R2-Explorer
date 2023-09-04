@@ -13,7 +13,7 @@
     "package": "npm run build && npm pack",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @syack-security/some-r2-explorer",
+    "addscope": "node tools/packagejson name @yack-security/some-r2-explorer",
     "prettify": "prettier . --write --ignore-unknown",
     "prepareDisabled": "husky install"
   },
